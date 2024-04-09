@@ -57,9 +57,55 @@
 ถ้าสังเกต ในส่วนของ response ตรง Tests จะยังไม่มีอะไรขึ้นเลย เพราะเรายังไม่ได้เขียน test script ให้มาทดสอบใน request นี้ 
 
 โดยสิ่งที่เราควรตรวจอย่างแรกว่า API ทำงานได้ปกติคือ status code = 200 
+
 ```sh
-    pm.test("Status code is 200", function () {
-        pm.response.to.have.status(200);
-    });
+        pm.test("Status code is 200", function () {
+            pm.response.to.have.status(200);
+        });
 ```
-    
+ตรวจสอบจำนวนสินค้า เท่ากับ 29 รายการ
+
+```sh
+        pm.test("ตรวจสอบจำนวนสินค้า เท่ากับ 29 รายการ", function () {
+            var jsonData = pm.response.json();
+            pm.expect(jsonData.total).to.eql(29);
+        });
+ ```
+
+ตรวจสอบไอดีสินค้า เท่ากับ 1
+
+```sh
+        pm.test("ตรวจสอบไอดีสินค้า เท่ากับ 1", function () {
+            var jsonData = pm.response.json();
+            pm.expect(jsonData.products[0].id).to.eql(1);
+        });
+ ```
+
+ตรวจสอบชื่อสินค้า Balance Training Bicycle
+
+```sh
+        pm.test("ตรวจสอบชื่อสินค้า Balance Training Bicycle", function () {
+            var jsonData = pm.response.json();
+            pm.expect(jsonData.products[0].product_name).to.eql("Balance Training Bicycle");
+        });
+ ```
+
+ตรวจสอบราคาสินค้า USD เท่ากับ 119.95
+
+```sh
+        pm.test("ตรวจสอบราคาสินค้า USD เท่ากับ 119.95", function () {
+            var jsonData = pm.response.json();
+            m.expect(jsonData.products[0].product_price).to.eql(119.95);
+        });
+
+ ```
+
+ตรวจสอบราคาสินค้า THB เท่ากับ 4314.60
+
+```sh
+        pm.test("ตรวจสอบราคาสินค้า THB เท่ากับ 4314.60", function () {
+            pm.expect(jsonData.products[0].product_price_thb).to.eql(4314.60);
+            var jsonData = pm.response.json();
+        });
+ ```
+ถ้า API ทำงานถูกต้อง ผล Test ตรง response ต้องออกมาเป็น success 5/5
