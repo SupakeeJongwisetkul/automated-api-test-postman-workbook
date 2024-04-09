@@ -4,11 +4,19 @@
 เริ่มจากการสร้าง collection ใน postman
 และเริ่ม add request ลงใน collection
 
-ใน request แรก เราจะมาเริ่มจาก API Search Product
+ใน request แรก เราจะมาเริ่มจาก 
+
+# API Search Product
+
 
 1. เลือก METHOD ของ request เป็น GET
 
+    ![images](/src/images/METHOD.png)
+
 2. ตั้งค่า URL เป็น http://188.166.247.72/api/v1/product?q=Bicycle&offset=0&limit=20
+
+    ![images](/src/images/url.png)
+
 
 3. ตั้งค่า Query Params เป็น
 
@@ -17,6 +25,8 @@
     | q             |           Bicycle              |
     | offset        |               0                |
     | limit         |               20               |
+
+    ![images](/src/images/params.png)
 
 4. เมื่อกดส่ง request จะได้ response ตามนี้
     ```sh
@@ -43,3 +53,13 @@
                 ]
             }
     ```
+
+ถ้าสังเกต ในส่วนของ response ตรง Tests จะยังไม่มีอะไรขึ้นเลย เพราะเรายังไม่ได้เขียน test script ให้มาทดสอบใน request นี้ 
+
+โดยสิ่งที่เราควรตรวจอย่างแรกว่า API ทำงานได้ปกติคือ status code = 200 
+```sh
+    pm.test("Status code is 200", function () {
+        pm.response.to.have.status(200);
+    });
+```
+    
