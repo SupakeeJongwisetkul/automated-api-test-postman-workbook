@@ -187,3 +187,72 @@
 2. ตั้งค่า URL เป็น {{BASE_URL}}/api/v1/order
 
     ![images](/images/urlsubmitorder.png)
+
+3. ตั้งค่า Request Header
+
+    ```sh
+    {
+    "Content-Type": "application/json"
+    }
+    ```
+    ![images](/images/headersSubmitorder.png)
+
+3. ตั้งค่า Body
+    ```sh
+            {
+            "cart": [
+                {
+                    "product_id": 1,
+                    "quantity": 1
+                }
+            ],
+            "burn_point": 0,
+            "sub_total_price": 4314.6,
+            "discount_price": 0,
+            "total_price": 4364.6,
+            "shipping_method_id": 1,
+            "shipping_address": "189/413 หมู่ 2",
+            "shipping_sub_district": "แพรกษาใหม่",
+            "shipping_district": "เมืองสมุทรปราการ",
+            "shipping_province": "สมุทรปราการ",
+            "shipping_zip_code": "10280",
+            "recipient_first_name": "พงศกร",
+            "recipient_last_name": "รุ่งเรืองทรัพย์",
+            "recipient_phone_number": "090912799",
+            "payment_method_id": 1,
+            "payment_information": {
+                "card_name": "พงศกร รุ่งเรืองทรัพย์",
+                "card_number": "4719 7005 9159 0995",
+                "expire_date": "02/26",
+                "cvv": "75"
+            }
+        }
+    ```
+- เหมือนกับเส้น API ก่อนหน้านี้ เราควรเขียน test script ให้มาทดสอบใน request แทนการใช้สายตาตรวจสอบเพื่อให้ง่ายต่อการอ่านเราสามารถใช้ภาษาไทยเขียนชื่อ test script ได้
+    ```sh
+    {
+    
+    }
+    ```
+- ถ้า API ทำงานถูกต้อง ผล Test Results ต้องออกมาเป็น PASS 7/7
+    ![images](/images/responseProductDetail.png)
+
+
+# API : Confirm Payment
+1. เลือก METHOD ของ request เป็น POST
+
+    ![images](/images/post.png)
+
+2. ตั้งค่า URL เป็น {{BASE_URL}}/api/v1/confirmPayment
+
+    ![images](/images/urlsubmitorder.png)
+
+3. ตั้งค่า Body
+
+    ```sh
+    {
+    "order_id": 8004359122,
+    "otp": 124532,
+    "ref_otp": "AXYZ"
+    }
+    ```
