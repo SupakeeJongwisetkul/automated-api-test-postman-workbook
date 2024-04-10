@@ -2,7 +2,8 @@
 
 โจทย์ตัวอย่างนี้จะเป็นโจทย์การทดสอบการสั่งซื้อสินค้า 
 =======
-
+ก่อนที่จะไปใช้ Postman  ลองมาทำความรู้จักกับ Postman ที่ Level 0
+โจทย์ตัวอย่างนี้จะเป็นโจทย์การทดสอบการสั่งซื้อสินค้า
 โดยจะมี API Specification ให้ตามนี้ https://github.com/SCK-SEAL-TEAM-One/sck-online-store/wiki/API-Specification
 
 เริ่มจากการสร้าง collection ใน postman
