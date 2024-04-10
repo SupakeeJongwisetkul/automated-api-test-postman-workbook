@@ -106,7 +106,7 @@
             var jsonData = pm.response.json();
         });
  ```
-ถ้า API ทำงานถูกต้อง ผล Test ตรง response ต้องออกมาเป็น success 6/6
+ถ้า API ทำงานถูกต้อง ผล Test Results ต้องออกมาเป็น PASS 6/6
 
 ![Test](/images/testrespond.png)
 
@@ -121,7 +121,7 @@
 
     ![images](/images/urlproductDetail.png)
 
-4. เมื่อกดส่ง request จะได้ response ตามนี้
+3. เมื่อกดส่ง request จะได้ response ตามนี้
     ```sh
     {
         "id": 1,
@@ -133,3 +133,41 @@
         "stock": 100,
         "product_brand": "SportsFun"
     }
+    ```
+
+- เหมือนกับเส้น API ก่อนหน้านี้ เราควรเขียน test script ให้มาทดสอบใน request แทนการใช้สายตาตรวจสอบเพื่อให้ง่ายต่อการอ่านเราสามารถใช้ภาษาไทยเขียนชื่อ test script ได้
+    ```sh
+    var jsonData = pm.response.json();
+
+    pm.test("Status code is 200", function () {
+        pm.response.to.have.status(200);
+    });
+
+    pm.test("ตรวจสอบ product id เท่ากับ 1", function () {
+        pm.expect(jsonData.id).to.eql(1);
+    });
+
+    pm.test("ตรวจสอบชื่อสินค้า Balance Training Bicycle", function () {
+        pm.expect(jsonData.product_name).to.eql("Balance Training Bicycle");
+    });
+
+    pm.test("ตรวจสอบราคาสินค้า USD เท่ากับ 119.95", function () {
+        pm.expect(jsonData.product_price).to.eql(119.95);
+    });
+
+    pm.test("ตรวจสอบราคาสินค้า THB เท่ากับ 4314.60", function () {
+        pm.expect(jsonData.product_price_thb).to.eql(4314.60);
+    });
+
+    pm.test("ตรวจสอบราคาสินค้า THB เต็มเท่ากับ 4314.597182", function () {
+        pm.expect(jsonData.product_price_full_thb).to.eql(4314.597182);
+    });
+
+    pm.test("ตรวจสอบproduct_image เท่ากับ /Balance_Training_Bicycle.png", function () {
+        pm.expect(jsonData.product_image).to.eql("/Balance_Training_Bicycle.png");
+    });
+
+    ```
+
+- ถ้า API ทำงานถูกต้อง ผล Test Results ต้องออกมาเป็น PASS 7/7
+    ![images](/images/responseProductDetail.png)
