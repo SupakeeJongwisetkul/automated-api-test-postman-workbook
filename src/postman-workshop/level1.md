@@ -11,22 +11,17 @@
 
 1. เลือก METHOD ของ request เป็น GET
 
-    ![images](/src/images/METHOD.png)
+    ![images](/images/METHOD.png)
 
 2. ตั้งค่า URL เป็น http://188.166.247.72/api/v1/product?q=Bicycle&offset=0&limit=20
 
-    ![images](/src/images/url.png)
+    ![images](/images/url.png)
 
 
 3. ตั้งค่า Query Params เป็น
 
-    | key           |            Value               |
-    |---------------|--------------------------------|
-    | q             |           Bicycle              |
-    | offset        |               0                |
-    | limit         |               20               |
 
-    ![images](/src/images/params.png)
+    ![images](/images/params.png)
 
 4. เมื่อกดส่ง request จะได้ response ตามนี้
     ```sh
