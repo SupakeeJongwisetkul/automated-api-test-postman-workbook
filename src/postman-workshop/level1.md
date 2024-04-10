@@ -116,7 +116,7 @@
 
 ![Test](/images/testrespond.png)
 
-# API Search Product
+# API Product Detail
 
 
 1. เลือก METHOD ของ request เป็น GET
@@ -227,15 +227,36 @@
                 "cvv": "75"
             }
         }
+
     ```
+
+4. เมื่อกดส่ง request จะได้ response ตามนี้
+     ```sh
+    {
+        "order_id": 1
+    }
+    ```
+
 - เหมือนกับเส้น API ก่อนหน้านี้ เราควรเขียน test script ให้มาทดสอบใน request แทนการใช้สายตาตรวจสอบเพื่อให้ง่ายต่อการอ่านเราสามารถใช้ภาษาไทยเขียนชื่อ test script ได้
     ```sh
     {
-    
+        var jsonData = pm.response.json();
+
+        pm.test('Status code is 200', function () {
+            pm.response.to.have.status(200);
+        })
+
+        pm.test("ออเดอร์ ID ต้องได้รับค่า" + jsonData.order_id, function () {
+            
+            pm.expect(jsonData.order_id).not.undefined;
+            pm.collectionVariables.set("orderid", jsonData.order_id);
+        });
+
+
     }
     ```
-- ถ้า API ทำงานถูกต้อง ผล Test Results ต้องออกมาเป็น PASS 7/7
-    ![images](/images/responseProductDetail.png)
+- ถ้า API ทำงานถูกต้อง ผล Test Results ต้องออกมาเป็น PASS 2/2
+    ![images](/images/submitordertest.png)
 
 
 # API : Confirm Payment
@@ -245,7 +266,7 @@
 
 2. ตั้งค่า URL เป็น {{BASE_URL}}/api/v1/confirmPayment
 
-    ![images](/images/urlsubmitorder.png)
+    ![images](/images/urlspayment.png)
 
 3. ตั้งค่า Body
 
@@ -256,3 +277,37 @@
     "ref_otp": "AXYZ"
     }
     ```
+4. เมื่อกดส่ง request จะได้ response ตามนี้
+    ```sh
+    {
+        {
+        "order_id": 3,
+        "payment_date": "2024-04-03T12:24:49.129923684+07:00",
+        "shipping_method_id": 1,
+        "tracking_number": "KR-385525357"
+        }
+    }
+    ```
+
+- เหมือนกับเส้น API ก่อนหน้านี้ เราควรเขียน test script ให้มาทดสอบใน request แทนการใช้สายตาตรวจสอบเพื่อให้ง่ายต่อการอ่านเราสามารถใช้ภาษาไทยเขียนชื่อ test script ได้
+    ```sh
+    {
+        var jsonData = pm.response.json();
+
+        pm.test('Status code is 200', function () {
+            pm.response.to.have.status(200);
+        })
+
+        pm.test('ตรวจสอบ order_id', function () {
+            const orderId = pm.collectionVariables.get('orderid');
+            pm.expect(jsonData.order_id).to.eql(orderId);
+        })
+
+        pm.test("ตรวจสอบtracking_number ต้องมี KR-", function () {
+            pm.expect(jsonData.tracking_number).to.have.string("KR-");
+        });
+
+    }
+    ```
+- ถ้า API ทำงานถูกต้อง ผล Test Results ต้องออกมาเป็น PASS 3/3
+    ![images](/images/testpayment.png)
