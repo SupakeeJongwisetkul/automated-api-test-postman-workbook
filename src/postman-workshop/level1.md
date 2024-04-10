@@ -3,6 +3,8 @@
 โดยจะมี API Specification ให้ตามนี้ https://github.com/SCK-SEAL-TEAM-One/sck-online-store/wiki/API-Specification
 
 เริ่มจากการสร้าง collection ใน postman
+
+
 และเริ่ม add request ลงใน collection
 
 ใน request แรก เราจะมาเริ่มจาก 
