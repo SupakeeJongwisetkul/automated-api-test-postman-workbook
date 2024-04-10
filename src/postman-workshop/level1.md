@@ -51,6 +51,8 @@
 
 ถ้าสังเกต ในส่วนของ response ตรง Tests จะยังไม่มีอะไรขึ้นเลย เพราะเรายังไม่ได้เขียน test script ให้มาทดสอบใน request นี้ 
 
+![Test](/images/Test.png)
+
 โดยสิ่งที่เราควรตรวจอย่างแรกว่า API ทำงานได้ปกติคือ status code = 200 
 
 ```sh
@@ -103,4 +105,6 @@
             var jsonData = pm.response.json();
         });
  ```
-ถ้า API ทำงานถูกต้อง ผล Test ตรง response ต้องออกมาเป็น success 5/5
+ถ้า API ทำงานถูกต้อง ผล Test ตรง response ต้องออกมาเป็น success 6/6
+
+![Test](/images/testrespond.png)
