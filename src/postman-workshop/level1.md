@@ -1,5 +1,5 @@
 # Automantion Test Postman Level 1
-โจทย์ตัวอย่างนี้จะเป็นโจทย์การทดสอบการสั่งซื้อสินค้า
+โจทย์ตัวอย่างนี้จะเป็นโจทย์การทดสอบการสั่งซื้อสินค้า ซึ่งประกอบด้วย API 4 เส้น
 
 เริ่มจากการสร้าง collection ใน postman
 และเริ่ม add request ลงใน collection
@@ -108,3 +108,28 @@
 ถ้า API ทำงานถูกต้อง ผล Test ตรง response ต้องออกมาเป็น success 6/6
 
 ![Test](/images/testrespond.png)
+
+# API Search Product
+
+
+1. เลือก METHOD ของ request เป็น GET
+
+    ![images](/images/METHOD.png)
+
+2. ตั้งค่า URL เป็น http://188.166.247.72/api/v1/product/1
+
+    ![images](/images/urlproductDetail.png)
+
+4. เมื่อกดส่ง request จะได้ response ตามนี้
+    ```sh
+        {
+            "id": 1,
+            "product_name": "Balance Training Bicycle",
+            "product_price": 119.95,
+            "product_price_thb": 4314.6,
+            "product_price_full_thb": 4314.597182,
+            "product_image": "/Balance_Training_Bicycle.png",
+            "stock": 100,
+            "product_brand": "SportsFun"
+        }
+    ```
