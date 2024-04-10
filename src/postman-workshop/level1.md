@@ -171,3 +171,13 @@
 
 - ถ้า API ทำงานถูกต้อง ผล Test Results ต้องออกมาเป็น PASS 7/7
     ![images](/images/responseProductDetail.png)
+
+# API Submit Order
+
+1. เลือก METHOD ของ request เป็น POST
+
+    ![images](/images/post.png)
+
+2. ตั้งค่า URL เป็น {{BASE_URL}}/api/v1/order
+
+    ![images](/images/urlsubmitorder.png)
