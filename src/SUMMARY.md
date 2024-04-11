@@ -10,8 +10,10 @@
     - [Newman](./postman-workshop/level1/newman.md)
 
 - [Postman Workshop Level 2](./postman-workshop/level2.md)
-    - [Environment](./postman-workshop/level1/environment.md)
+    - [Environment](./postman-workshop/level2/environment.md)
+
 [Global Variable in Postman](chapter2.md) 
 
 [Postman Workshop Level 3](./postman-workshop/level3.md)
 
+/Users/wlb-kop/Desktop/automated-api-test-postman-workbook/src/postman-workshop/level2/environment.md
