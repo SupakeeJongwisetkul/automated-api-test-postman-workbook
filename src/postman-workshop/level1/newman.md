@@ -16,3 +16,10 @@ Newman เป็นครื่องมือที่ใช้ Run API Collect
         newman run sck-shoping-mall-level
     }
     ```    
+- เมื่อ run command newman แล้วจะได้ Report ที่ค่อนข้างดูยากบน Terminal หากอย่างได้ report ที่ดูง่าย สามารถใช้ htmaextea ได้โดยใข้ command
+
+    ```sh
+    {
+        newman run -r htmlextra sck-shoping-mall.postman_collection.json
+    }
+    ```    
