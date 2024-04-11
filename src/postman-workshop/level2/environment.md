@@ -14,11 +14,11 @@
 
 จากใน workshop ได้สร้าง environment ได้แก่ 
 
-sck-shopping-mall-dev
+- sck-shopping-mall-dev
 
-sck-shopping-mall-qa
+- sck-shopping-mall-qa
 
-sck-shopping-mall-local
+- sck-shopping-mall-local
 
 ในส่วนของการใช้ environment มีขั้นตอนดังนี้
 
