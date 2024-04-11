@@ -1,27 +1,33 @@
-# Chapter 1
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="/style/styles.css" />
+</head>
+<body>
+# บทที่ 1
 ## Software Process Development and Test Development
 
-> สามารถเข้าไปดูได้ที่บอร์ด [MiroBoard](https://miro.com/app/board/uXjVKZPHSL4=/)
+ในโลกของการพัฒนาซอฟต์แวร์นั้น จุดเริ่มต้นมาจากความต้องการที่จะมีซอฟท์แวร์หรือโปรแกรมเพื่อตอบสนองการทำงานในเชิงธุรกิจ หรือ **Needs** หลังจากผ่านการวิเคราะห์และพัฒนาความต้องการออกมาแล้วจะได้เงื่อนไขทางธุรกิจ หรือ **Business Conditions**  เมื่อเงื่อนไขทางธุรกิจผ่านการวิเคราะห์และพัฒนาแล้วจะได้ความสามารถของระบบที่ต้องทำงานได้ หรือที่เรียกว่า **Software Capabilities**
+
+![Needs to Capability](/images/needs-to-cap.png)
+
+
+
+
+
+
+
 
 ในที่นี้ จะให้ความสำคัญของการทำ Functional Automation Test ในระดับ API เนื่องจากว่า
 1. การทดสอบทำงานได้เร็วขึ้นและลดการใช้คนในการทำการทดสอบ
 2. มีความเสถียรมากกว่า เนื่องจากหน้าจอ มีโอกาสที่จะเปลี่ยนแปลงได้บ่อย
 3. สามารถตรวจจับข้อบกพร่องในการทำงานของซอฟต์แวร์ได้ไวขึ้น
 
-![Automation Test Target](/images/automation-tests-target.png)
+>![Automation Test Target](/images/automation-tests-target.png)
+ 
 
 
-
----
-ก่อนที่จะไปเริ่มกันที่การเขียน Test Script จำเป็นต้องลงเครื่องมือที่ใช้ในการพัฒนาเหล่านี้ก่อน
-
-###  Tools
-| Tool         |            version             |  Download    |  Description   |
-|---------------|--------------------------------|--------------|--------------|
-| Visual Studio Code (vscode)    |   Windows 10,11 macOS 10.11 ขึ้นไป |  [vscode](https://code.visualstudio.com)      |       โปรแกรมแก้ไขโค้ด       |
-| postman             |           10.23.5              |        [postman](https://www.postman.com/downloads/postman-agent/)      |       เครื่องมือสำหรับ Test APIs       |
-| Newman        |               6.1.2                |      [newman](https://www.npmjs.com/package/newman)        |       Run API Collection ของ Postman บน terminal       |
-| Htmlextra         |               1.23.1               |       [Htmlextra](https://www.npmjs.com/package/newman-reporter-htmlextra)        |       แสดง Test Report ของ Newman ในรูปแบบสวยงามและเข้าใจง่าย        |
-| mountebank         |               2.9.1              |       [mountebank](http://www.mbtest.org/docs/gettingStarted)        |       Opensource จำลอง พฤติกรรม Server        |
-
-ถ้าต้องการอ่านเพิ่มเติมสำหรับเครื่องมือชื่อว่า Postman สามารถเข้าไปอ่านได้ที่ [Postman Website](https://www.postman.com/product/what-is-postman/)
+</body>
+</html>

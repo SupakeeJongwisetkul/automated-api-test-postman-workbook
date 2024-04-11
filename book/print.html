@@ -1,0 +1,583 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title></title>
+        <meta name="robots" content="noindex">
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="postman-workshop/level0-postman-introduce.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="chapter1.html"><strong aria-hidden="true">2.</strong> Software Development and Test Development</a></li><li class="chapter-item expanded "><a href="postman-workshop/level1.html"><strong aria-hidden="true">3.</strong> Postman Workshop Level 1</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="postman-workshop/level1/Test-API.html"><strong aria-hidden="true">3.1.</strong> Test-API</a></li><li class="chapter-item expanded "><a href="postman-workshop/level1/Run-collection.html"><strong aria-hidden="true">3.2.</strong> Run collection</a></li><li class="chapter-item expanded "><a href="postman-workshop/level1/environment.html"><strong aria-hidden="true">3.3.</strong> Environment</a></li><li class="chapter-item expanded "><a href="postman-workshop/level1/newman.html"><strong aria-hidden="true">3.4.</strong> Newman</a></li></ol></li><li class="chapter-item expanded "><a href="postman-workshop/level2.html">Postman Workshop Level 2</a></li><li class="chapter-item expanded affix "><a href="chapter2.html">Global Variable in Postman</a></li><li class="chapter-item expanded affix "><a href="postman-workshop/level3.html">Postman Workshop Level 3</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title"></h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="postman-introduction"><a class="header" href="#postman-introduction">Postman Introduction</a></h1>
+<p>ใน Workshop ไมไ่ด้มีการแนะนำว่าอะไรคือ Collection, Emvironments หรือ Variables โดยตรง
+แต่เป็นการพาทำตาม Workshop เป็นขั้นไปตอนไป และตามขอบเขตของการใช้งานในการทดสอบ  จึงนำมาสรุปไว้ที่บทนี้</p>
+<p> <img src="postman-workshop//images/postman.png" alt="Postman Structure" /></p>
+<p>หลังจากทำการติดตั้ง Postman เสร็จและเปิด application ขึ้นมาแล้ว
+ให้ทำการสร้างตามลำดับต่อไปนี้</p>
+<ol>
+<li>สร้าง Workspace เพื่อจัดระเบียบโค้ดของเราเอง และเผื่อการใช้ในการพัฒนาโค้ดกับเพื่อนร่วมงานหรือกับทีมของเราด้วย</li>
+<li>สร้าง Collections</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="/style/styles.css" />
+</head>
+<body>
+# บทที่ 1
+## Software Process Development and Test Development
+<p>ในโลกของการพัฒนาซอฟต์แวร์นั้น จุดเริ่มต้นมาจากความต้องการที่จะมีซอฟท์แวร์หรือโปรแกรมเพื่อตอบสนองการทำงานในเชิงธุรกิจ หรือ <strong>Needs</strong> หลังจากผ่านการวิเคราะห์และพัฒนาความต้องการออกมาแล้วจะได้เงื่อนไขทางธุรกิจ หรือ <strong>Business Conditions</strong>  เมื่อเงื่อนไขทางธุรกิจผ่านการวิเคราะห์และพัฒนาแล้วจะได้ความสามารถของระบบที่ต้องทำงานได้ หรือที่เรียกว่า <strong>Software Capabilities</strong></p>
+<p><img src="/images/needs-to-cap.png" alt="Needs to Capability" /></p>
+<p>ในที่นี้ จะให้ความสำคัญของการทำ Functional Automation Test ในระดับ API เนื่องจากว่า</p>
+<ol>
+<li>การทดสอบทำงานได้เร็วขึ้นและลดการใช้คนในการทำการทดสอบ</li>
+<li>มีความเสถียรมากกว่า เนื่องจากหน้าจอ มีโอกาสที่จะเปลี่ยนแปลงได้บ่อย</li>
+<li>สามารถตรวจจับข้อบกพร่องในการทำงานของซอฟต์แวร์ได้ไวขึ้น</li>
+</ol>
+<blockquote>
+<p><img src="/images/automation-tests-target.png" alt="Automation Test Target" /></p>
+</blockquote>
+</body>
+</html><div style="break-before: page; page-break-before: always;"></div><h1 id="automantion-test-postman-level-1"><a class="header" href="#automantion-test-postman-level-1">Automantion Test Postman Level 1</a></h1>
+<p>ก่อนที่จะไปเริ่มฝึกโจทย์ มาทำความรู้จักกับ Postman ก่อนที่ ไปที่ <a href="postman-workshop/level0-postman-introduce.html">แนะนำ Postman</a></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="test-api"><a class="header" href="#test-api">Test API</a></h1>
+<p>โจทย์ตัวอย่างนี้จะเป็นโจทย์การทดสอบการสั่งซื้อสินค้า
+โดยจะมี API Specification ให้ตามนี้ https://github.com/SCK-SEAL-TEAM-One/sck-online-store/wiki/API-Specification</p>
+<p>เริ่มจากการสร้าง collection ใน postman</p>
+<p>และเริ่ม add request ลงใน collection</p>
+<p>ใน request แรก เราจะมาเริ่มจาก</p>
+<h3 id="api-search-product"><a class="header" href="#api-search-product">API Search Product</a></h3>
+<ol>
+<li>
+<p>เลือก METHOD ของ request เป็น GET</p>
+<p><img src="postman-workshop/level1//images/METHOD.png" alt="images" /></p>
+</li>
+<li>
+<p>ตั้งค่า URL เป็น http://188.166.247.72/api/v1/product?q=Bicycle&amp;offset=0&amp;limit=20</p>
+<p><img src="postman-workshop/level1//images/url.png" alt="images" /></p>
+</li>
+<li>
+<p>ตั้งค่า Query Params เป็น</p>
+<p><img src="postman-workshop/level1//images/params.png" alt="images" /></p>
+</li>
+<li>
+<p>เมื่อกดส่ง request จะได้ response ตามนี้</p>
+<pre><code class="language-sh">status code : 200 
+        {
+        "total": 2,
+        "products": [
+                {
+                    "id": 1,
+                    "product_name": "Balance Training Bicycle",
+                    "product_price": 119.95,
+                    "product_price_thb": 4314.6,
+                    "product_price_full_thb": 4314.597182,
+                    "product_image": "/Balance_Training_Bicycle.png"
+                },
+                {
+                    "id": 2,
+                    "product_name": "43 Piece dinner Set",
+                    "product_price": 12.95,
+                    "product_price_thb": 465.81,
+                    "product_price_full_thb": 465.811034,
+                    "product_image": "/43_Piece_dinner_Set.png"
+                }
+            ]
+        }
+</code></pre>
+</li>
+</ol>
+<p>ถ้าสังเกต ในส่วนของ response ตรง Tests จะยังไม่มีอะไรขึ้นเลย เพราะเรายังไม่ได้เขียน test script ให้มาทดสอบใน request นี้</p>
+<p><img src="postman-workshop/level1//images/Test.png" alt="Test" /></p>
+<p>โดยสิ่งที่เราควรตรวจอย่างแรกว่า API ทำงานได้ปกติคือ status code = 200</p>
+<pre><code class="language-sh">        pm.test("Status code is 200", function () {
+            pm.response.to.have.status(200);
+        });
+</code></pre>
+<p>ตรวจสอบจำนวนสินค้า เท่ากับ 29 รายการ</p>
+<pre><code class="language-sh">        pm.test("ตรวจสอบจำนวนสินค้า เท่ากับ 29 รายการ", function () {
+            var jsonData = pm.response.json();
+            pm.expect(jsonData.total).to.eql(29);
+        });
+</code></pre>
+<p>ตรวจสอบไอดีสินค้า เท่ากับ 1</p>
+<pre><code class="language-sh">        pm.test("ตรวจสอบไอดีสินค้า เท่ากับ 1", function () {
+            var jsonData = pm.response.json();
+            pm.expect(jsonData.products[0].id).to.eql(1);
+        });
+</code></pre>
+<p>ตรวจสอบชื่อสินค้า Balance Training Bicycle</p>
+<pre><code class="language-sh">        pm.test("ตรวจสอบชื่อสินค้า Balance Training Bicycle", function () {
+            var jsonData = pm.response.json();
+            pm.expect(jsonData.products[0].product_name).to.eql("Balance Training Bicycle");
+        });
+</code></pre>
+<p>ตรวจสอบราคาสินค้า USD เท่ากับ 119.95</p>
+<pre><code class="language-sh">        pm.test("ตรวจสอบราคาสินค้า USD เท่ากับ 119.95", function () {
+            var jsonData = pm.response.json();
+            m.expect(jsonData.products[0].product_price).to.eql(119.95);
+        });
+
+</code></pre>
+<p>ตรวจสอบราคาสินค้า THB เท่ากับ 4314.60</p>
+<pre><code class="language-sh">        pm.test("ตรวจสอบราคาสินค้า THB เท่ากับ 4314.60", function () {
+            pm.expect(jsonData.products[0].product_price_thb).to.eql(4314.60);
+            var jsonData = pm.response.json();
+        });
+</code></pre>
+<pre><code>- ถ้า API ทำงานถูกต้อง ผล Test Results ต้องออกมาเป็น PASS 6/6
+</code></pre>
+<p><img src="postman-workshop/level1//images/testrespond.png" alt="Test" /></p>
+<h3 id="api-product-detail"><a class="header" href="#api-product-detail">API Product Detail</a></h3>
+<ol>
+<li>
+<p>เลือก METHOD ของ request เป็น GET</p>
+<p><img src="postman-workshop/level1//images/METHOD.png" alt="images" /></p>
+</li>
+<li>
+<p>ตั้งค่า URL เป็น http://188.166.247.72/api/v1/product/1</p>
+<p><img src="postman-workshop/level1//images/urlproductDetail.png" alt="images" /></p>
+</li>
+<li>
+<p>เมื่อกดส่ง request จะได้ response ตามนี้</p>
+<pre><code class="language-sh">{
+    "id": 1,
+    "product_name": "Balance Training Bicycle",
+    "product_price": 119.95,
+    "product_price_thb": 4314.6,
+    "product_price_full_thb": 4314.597182,
+    "product_image": "/Balance_Training_Bicycle.png",
+    "stock": 100,
+    "product_brand": "SportsFun"
+}
+</code></pre>
+<ul>
+<li>เหมือนกับเส้น API ก่อนหน้านี้ เราควรเขียน test script ให้มาทดสอบใน request แทนการใช้สายตาตรวจสอบเพื่อให้ง่ายต่อการอ่านเราสามารถใช้ภาษาไทยเขียนชื่อ test script ได้</li>
+</ul>
+<pre><code class="language-sh">var jsonData = pm.response.json();
+
+pm.test("Status code is 200", function () {
+    pm.response.to.have.status(200);
+});
+
+pm.test("ตรวจสอบ product id เท่ากับ 1", function () {
+    pm.expect(jsonData.id).to.eql(1);
+});
+
+pm.test("ตรวจสอบชื่อสินค้า Balance Training Bicycle", function () {
+    pm.expect(jsonData.product_name).to.eql("Balance Training Bicycle");
+});
+
+pm.test("ตรวจสอบราคาสินค้า USD เท่ากับ 119.95", function () {
+    pm.expect(jsonData.product_price).to.eql(119.95);
+});
+
+pm.test("ตรวจสอบราคาสินค้า THB เท่ากับ 4314.60", function () {
+    pm.expect(jsonData.product_price_thb).to.eql(4314.60);
+});
+
+pm.test("ตรวจสอบราคาสินค้า THB เต็มเท่ากับ 4314.597182", function () {
+    pm.expect(jsonData.product_price_full_thb).to.eql(4314.597182);
+});
+
+pm.test("ตรวจสอบproduct_image เท่ากับ /Balance_Training_Bicycle.png", function () {
+    pm.expect(jsonData.product_image).to.eql("/Balance_Training_Bicycle.png");
+});
+
+</code></pre>
+<ul>
+<li>ถ้า API ทำงานถูกต้อง ผล Test Results ต้องออกมาเป็น PASS 7/7
+<img src="postman-workshop/level1//images/responseProductDetail.png" alt="images" /></li>
+</ul>
+</li>
+</ol>
+<h3 id="api-submit-order"><a class="header" href="#api-submit-order">API Submit Order</a></h3>
+<ol>
+<li>
+<p>เลือก METHOD ของ request เป็น POST</p>
+<p><img src="postman-workshop/level1//images/post.png" alt="images" /></p>
+</li>
+<li>
+<p>ตั้งค่า URL เป็น {{BASE_URL}}/api/v1/order</p>
+<p><img src="postman-workshop/level1//images/urlsubmitorder.png" alt="images" /></p>
+</li>
+<li>
+<p>ตั้งค่า Request Header</p>
+<pre><code class="language-sh">{
+"Content-Type": "application/json"
+}
+</code></pre>
+<p><img src="postman-workshop/level1//images/headersSubmitorder.png" alt="images" /></p>
+</li>
+<li>
+<p>ตั้งค่า Body</p>
+<pre><code class="language-sh">        {
+        "cart": [
+            {
+                "product_id": 1,
+                "quantity": 1
+            }
+        ],
+        "burn_point": 0,
+        "sub_total_price": 4314.6,
+        "discount_price": 0,
+        "total_price": 4364.6,
+        "shipping_method_id": 1,
+        "shipping_address": "189/413 หมู่ 2",
+        "shipping_sub_district": "แพรกษาใหม่",
+        "shipping_district": "เมืองสมุทรปราการ",
+        "shipping_province": "สมุทรปราการ",
+        "shipping_zip_code": "10280",
+        "recipient_first_name": "พงศกร",
+        "recipient_last_name": "รุ่งเรืองทรัพย์",
+        "recipient_phone_number": "090912799",
+        "payment_method_id": 1,
+        "payment_information": {
+            "card_name": "พงศกร รุ่งเรืองทรัพย์",
+            "card_number": "4719 7005 9159 0995",
+            "expire_date": "02/26",
+            "cvv": "75"
+        }
+    }
+
+</code></pre>
+</li>
+<li>
+<p>เมื่อกดส่ง request จะได้ response ตามนี้</p>
+<pre><code class="language-sh">{
+   "order_id": 1
+}
+</code></pre>
+<ul>
+<li>เหมือนกับเส้น API ก่อนหน้านี้ เราควรเขียน test script ให้มาทดสอบใน request แทนการใช้สายตาตรวจสอบเพื่อให้ง่ายต่อการอ่านเราสามารถใช้ภาษาไทยเขียนชื่อ test script ได้</li>
+</ul>
+<pre><code class="language-sh">{
+    var jsonData = pm.response.json();
+
+    pm.test('Status code is 200', function () {
+        pm.response.to.have.status(200);
+    })
+
+    pm.test("ออเดอร์ ID ต้องได้รับค่า" + jsonData.order_id, function () {
+        
+        pm.expect(jsonData.order_id).not.undefined;
+        pm.collectionVariables.set("orderid", jsonData.order_id);
+    });
+
+
+}
+</code></pre>
+<ul>
+<li>ถ้า API ทำงานถูกต้อง ผล Test Results ต้องออกมาเป็น PASS 2/2
+<img src="postman-workshop/level1//images/submitordertest.png" alt="images" /></li>
+</ul>
+</li>
+</ol>
+<h3 id="api--confirm-payment"><a class="header" href="#api--confirm-payment">API : Confirm Payment</a></h3>
+<ol>
+<li>
+<p>เลือก METHOD ของ request เป็น POST</p>
+<p><img src="postman-workshop/level1//images/post.png" alt="images" /></p>
+</li>
+<li>
+<p>ตั้งค่า URL เป็น {{BASE_URL}}/api/v1/confirmPayment</p>
+<p><img src="postman-workshop/level1//images/urlspayment.png" alt="images" /></p>
+</li>
+<li>
+<p>ตั้งค่า Body</p>
+<pre><code class="language-sh">{
+"order_id": 8004359122,
+"otp": 124532,
+"ref_otp": "AXYZ"
+}
+</code></pre>
+</li>
+<li>
+<p>เมื่อกดส่ง request จะได้ response ตามนี้</p>
+<pre><code class="language-sh">{
+    {
+    "order_id": 3,
+    "payment_date": "2024-04-03T12:24:49.129923684+07:00",
+    "shipping_method_id": 1,
+    "tracking_number": "KR-385525357"
+    }
+}
+</code></pre>
+<ul>
+<li>เหมือนกับเส้น API ก่อนหน้านี้ เราควรเขียน test script ให้มาทดสอบใน request แทนการใช้สายตาตรวจสอบเพื่อให้ง่ายต่อการอ่านเราสามารถใช้ภาษาไทยเขียนชื่อ test script ได้</li>
+</ul>
+<pre><code class="language-sh">{
+    var jsonData = pm.response.json();
+
+    pm.test('Status code is 200', function () {
+        pm.response.to.have.status(200);
+    })
+
+    pm.test('ตรวจสอบ order_id', function () {
+        const orderId = pm.collectionVariables.get('orderid');
+        pm.expect(jsonData.order_id).to.eql(orderId);
+    })
+
+    pm.test("ตรวจสอบtracking_number ต้องมี KR-", function () {
+        pm.expect(jsonData.tracking_number).to.have.string("KR-");
+    });
+
+}
+</code></pre>
+<ul>
+<li>ถ้า API ทำงานถูกต้อง ผล Test Results ต้องออกมาเป็น PASS 3/3
+<img src="postman-workshop/level1//images/testpayment.png" alt="images" /></li>
+</ul>
+</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="run-collection"><a class="header" href="#run-collection">run collection</a></h1>
+<p>จากโจทย์ตัวอย่างมีทั้งหมด 4 requset ใน 1 collection ซึ่งถ้าต้องกดที่ละ requset ในการ test น่าจะช้าไป จึงมีวิธีที่เร็วกว่าคือ run collection</p>
+<ol>
+<li>เริ่มจาก กดรูปสามจุด ตรง collection
+<img src="postman-workshop/level1//images/intoRuncollection.png" alt="images" /></li>
+<li>เลือกไปที่ run collection
+<img src="postman-workshop/level1//images/chooseRuncollection.png" alt="images" /></li>
+<li>เมื่อเลือกไปที่ run collection จะได้หน้าจอที่แสดง request ทั้งหมดใน collection ที่ต้องการทดสอบ แล้วกดไปที่ Run "ชื่อ collection "
+<img src="postman-workshop/level1//images/runCollection.png" alt="images" />
+<ul>
+<li>จะเห็นได้ว่าการ run ทั้ง collection จะเร็วกว่าการกด run ทีละ request อย่างมาก
+<img src="postman-workshop/level1//images/runcollectionpass.png" alt="images" /></li>
+</ul>
+</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="environment-variable"><a class="header" href="#environment-variable">Environment variable</a></h1>
+<p>ในการทำงานเราอาจจะมีหลาย Environment เช่น Dev Environment, QA Environment ,Local Environment
+เมื่อเราต้องการใช้งาน Test script กับหลาย environment แทนที่เราจะเปลี่ยนค่าบางอย่างสำหรับ Environment ที่ต่างกัน เราสามารถตั้งค่าที่เปลี่ยนทุก Environment เป็น Environment variable ได้ เพื่อที่จะเลือก Environment สำหรับการ run collection</p>
+<p>ตัวอย่างจากโจทย์เช่น</p>
+<p>การเปลี่ยน urls สำหรับ Test ใน local environment ใน  collection ของการซื้อสินค้า มี 4 request ทำให้ต้องเปลี่ยน</p>
+<div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><h1 id="level2"><a class="header" href="#level2">Level2</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="chapter2"><a class="header" href="#chapter2">Chapter2</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="level3"><a class="header" href="#level3">Level3</a></h1>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </div>
+    </body>
+</html>
